@@ -1,5 +1,6 @@
 package by.epam.dedik.day6.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
@@ -8,10 +9,12 @@ public class Library {
     private List<Book> books;
 
     private Library() {
+        books = new ArrayList<Book>();
     }
 
     public static Library getInstance() {
-        return instance == null ? new Library() : instance;
+        instance = instance == null ? new Library() : instance;
+        return instance;
     }
 
     public List<Book> getBooks() {
