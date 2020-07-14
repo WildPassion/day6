@@ -9,29 +9,29 @@ import by.epam.dedik.day6.entity.Library;
 import java.util.List;
 
 public class BookListDaoImpl implements BookListDao {
-    private static final BookValidator BOOK_VALIDATOR = new BookValidator();
+    private BookValidator bookValidator = new BookValidator();
 
     @Override
     public boolean addBook(Book book) {
-        if (BOOK_VALIDATOR.isValidBook(book)) {
+        boolean result = false;
+        if (bookValidator.isValidBook(book)) {
             if (book.getName() == null) {
                 book.setId(UniqueIdService.getId());
             }
             List<Book> books = Library.getInstance().getBooks();
-            books.add(book);
-            return true;
+            result = books.add(book);
         }
-        return false;
+        return result;
     }
 
     @Override
     public boolean removeBook(Book book) {
+        boolean result = false;
         if (book != null && book.getId() != 0) {
             List<Book> books = Library.getInstance().getBooks();
-            return books.remove(books.stream().
-                    filter(current -> current.getName().equals(book.getName())).findAny().orElse(book));
+            result = books.remove(book);
         }
-        return false;
+        return result;
     }
 
     @Override
