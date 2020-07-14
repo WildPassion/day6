@@ -9,13 +9,13 @@ public interface BookListDao {
 
     boolean removeBook(Book book);
 
-    List<Book> findByName();
+    List<Book> findByName(String name);
 
-    List<Book> findByAuthor();
+    List<Book> findByAuthor(String author);
 
-    List<Book> findByYear();
+    List<Book> findByYear(int year);
 
-    List<Book> findByNumberPages();
+    List<Book> findByNumberPages(int numberPages);
 
     List<Book> sortByName();
 

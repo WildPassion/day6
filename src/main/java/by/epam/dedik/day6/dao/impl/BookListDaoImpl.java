@@ -1,12 +1,13 @@
 package by.epam.dedik.day6.dao.impl;
 
-import by.epam.dedik.day6.service.UniqueIdService;
-import by.epam.dedik.day6.validator.BookValidator;
 import by.epam.dedik.day6.dao.BookListDao;
 import by.epam.dedik.day6.entity.Book;
 import by.epam.dedik.day6.entity.Library;
+import by.epam.dedik.day6.service.UniqueIdService;
+import by.epam.dedik.day6.validator.BookValidator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookListDaoImpl implements BookListDao {
     private BookValidator bookValidator = new BookValidator();
@@ -35,23 +36,31 @@ public class BookListDaoImpl implements BookListDao {
     }
 
     @Override
-    public List<Book> findByName() {
-        return null;
+    public List<Book> findByName(String name) {
+        return Library.getInstance().getBooks().stream().
+                filter(book -> book.getName().equals(name)).
+                collect(Collectors.toList());
     }
 
     @Override
-    public List<Book> findByAuthor() {
-        return null;
+    public List<Book> findByAuthor(String author) {
+        return Library.getInstance().getBooks().stream().
+                filter(book -> book.getAuthors().contains(author)).
+                collect(Collectors.toList());
     }
 
     @Override
-    public List<Book> findByYear() {
-        return null;
+    public List<Book> findByYear(int year) {
+        return Library.getInstance().getBooks().stream().
+                filter(book -> book.getYear() == year).
+                collect(Collectors.toList());
     }
 
     @Override
-    public List<Book> findByNumberPages() {
-        return null;
+    public List<Book> findByNumberPages(int numberPages) {
+        return Library.getInstance().getBooks().stream().
+                filter(book -> book.getNumberPages() == numberPages).
+                collect(Collectors.toList());
     }
 
     @Override
