@@ -3,12 +3,14 @@ package epam.dedik.day6.dao.impl;
 import by.epam.dedik.day6.dao.impl.BookListDaoImpl;
 import by.epam.dedik.day6.entity.Book;
 import by.epam.dedik.day6.entity.Library;
+import by.epam.dedik.day6.service.SortType;
 import epam.dedik.day6.data.DataTransfer;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -101,5 +103,57 @@ public class BookListDaoImplTest {
         bookListDao.addBook(book);
         List<Book> found = bookListDao.findByNumberPages(0);
         Assert.assertFalse(found.contains(book));
+    }
+
+    @Test(dataProvider = "getBooks", dataProviderClass = DataTransfer.class)
+    public void sortByName_books_sortedBooks(List<Book> books) {
+        books.forEach(book -> bookListDao.addBook(book));
+        List<Book> actual = bookListDao.sortByTag(SortType.NAME);
+        List<Book> expected = Arrays.asList(
+                new Book("Book1", Arrays.asList("Author21", "Author22"), 2003, 400),
+                new Book("Book2", Arrays.asList("Author31", "Author32"), 2004, 500),
+                new Book("Book3", Arrays.asList("Author41", "Author42"), 2001, 200),
+                new Book("Book4", Arrays.asList("Author51", "Author52"), 2005, 100),
+                new Book("Book5", Arrays.asList("Author11", "Author12"), 2002, 300));
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test(dataProvider = "getBooks", dataProviderClass = DataTransfer.class)
+    public void sortByAuthor_books_sortedBooks(List<Book> books) {
+        books.forEach(book -> bookListDao.addBook(book));
+        List<Book> actual = bookListDao.sortByTag(SortType.AUTHOR);
+        List<Book> expected = Arrays.asList(
+                new Book("Book5", Arrays.asList("Author11", "Author12"), 2002, 300),
+                new Book("Book1", Arrays.asList("Author21", "Author22"), 2003, 400),
+                new Book("Book2", Arrays.asList("Author31", "Author32"), 2004, 500),
+                new Book("Book3", Arrays.asList("Author41", "Author42"), 2001, 200),
+                new Book("Book4", Arrays.asList("Author51", "Author52"), 2005, 100));
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test(dataProvider = "getBooks", dataProviderClass = DataTransfer.class)
+    public void sortByYear_books_sortedBooks(List<Book> books) {
+        books.forEach(book -> bookListDao.addBook(book));
+        List<Book> actual = bookListDao.sortByTag(SortType.YEAR);
+        List<Book> expected = Arrays.asList(
+                new Book("Book3", Arrays.asList("Author41", "Author42"), 2001, 200),
+                new Book("Book5", Arrays.asList("Author11", "Author12"), 2002, 300),
+                new Book("Book1", Arrays.asList("Author21", "Author22"), 2003, 400),
+                new Book("Book2", Arrays.asList("Author31", "Author32"), 2004, 500),
+                new Book("Book4", Arrays.asList("Author51", "Author52"), 2005, 100));
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test(dataProvider = "getBooks", dataProviderClass = DataTransfer.class)
+    public void sortByNumberPages_books_sortedBooks(List<Book> books) {
+        books.forEach(book -> bookListDao.addBook(book));
+        List<Book> actual = bookListDao.sortByTag(SortType.NUMBER_PAGES);
+        List<Book> expected = Arrays.asList(
+                new Book("Book4", Arrays.asList("Author51", "Author52"), 2005, 100),
+                new Book("Book3", Arrays.asList("Author41", "Author42"), 2001, 200),
+                new Book("Book5", Arrays.asList("Author11", "Author12"), 2002, 300),
+                new Book("Book1", Arrays.asList("Author21", "Author22"), 2003, 400),
+                new Book("Book2", Arrays.asList("Author31", "Author32"), 2004, 500));
+        Assert.assertEquals(actual, expected);
     }
 }

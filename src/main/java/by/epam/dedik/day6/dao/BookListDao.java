@@ -1,6 +1,7 @@
 package by.epam.dedik.day6.dao;
 
 import by.epam.dedik.day6.entity.Book;
+import by.epam.dedik.day6.service.SortType;
 
 import java.util.List;
 
@@ -17,11 +18,5 @@ public interface BookListDao {
 
     List<Book> findByNumberPages(int numberPages);
 
-    List<Book> sortByName();
-
-    List<Book> sortByAuthor();
-
-    List<Book> sortByYear();
-
-    List<Book> sortByNumberPages();
+    List<Book> sortByTag(SortType sortType);
 }

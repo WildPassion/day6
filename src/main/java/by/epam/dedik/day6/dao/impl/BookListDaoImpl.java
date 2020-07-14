@@ -3,11 +3,15 @@ package by.epam.dedik.day6.dao.impl;
 import by.epam.dedik.day6.dao.BookListDao;
 import by.epam.dedik.day6.entity.Book;
 import by.epam.dedik.day6.entity.Library;
+import by.epam.dedik.day6.service.SortType;
 import by.epam.dedik.day6.service.UniqueIdService;
 import by.epam.dedik.day6.validator.BookValidator;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BookListDaoImpl implements BookListDao {
     private BookValidator bookValidator = new BookValidator();
@@ -64,22 +68,9 @@ public class BookListDaoImpl implements BookListDao {
     }
 
     @Override
-    public List<Book> sortByName() {
-        return null;
-    }
-
-    @Override
-    public List<Book> sortByAuthor() {
-        return null;
-    }
-
-    @Override
-    public List<Book> sortByYear() {
-        return null;
-    }
-
-    @Override
-    public List<Book> sortByNumberPages() {
-        return null;
+    public List<Book> sortByTag(SortType sortType) {
+        return Library.getInstance().getBooks().stream()
+                .sorted(sortType.getComparator())
+                .collect(Collectors.toList());
     }
 }
