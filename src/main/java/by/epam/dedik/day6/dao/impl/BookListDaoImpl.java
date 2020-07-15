@@ -7,11 +7,8 @@ import by.epam.dedik.day6.service.SortType;
 import by.epam.dedik.day6.service.UniqueIdService;
 import by.epam.dedik.day6.validator.BookValidator;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BookListDaoImpl implements BookListDao {
     private BookValidator bookValidator = new BookValidator();
