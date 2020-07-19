@@ -117,13 +117,7 @@ public class BookListDaoTest {
 
     @Test(dataProvider = "getBooks", dataProviderClass = DataTransfer.class)
     public void sortByName_books_sortedBooks(List<CustomBook> books) {
-        books.forEach(book -> {
-            try {
-                bookListDao.addBook(book);
-            } catch (DaoException e) {
-                Assert.fail(e.getMessage());
-            }
-        });
+        books.forEach(book -> Library.getInstance().addBook(book));
         List<CustomBook> actual = bookListDao.sortByTag(SortType.NAME);
         List<CustomBook> expected = Arrays.asList(
                 new CustomBook("Book1", Arrays.asList("Author21", "Author22"), 2003, 400),
@@ -136,13 +130,7 @@ public class BookListDaoTest {
 
     @Test(dataProvider = "getBooks", dataProviderClass = DataTransfer.class)
     public void sortByAuthor_books_sortedBooks(List<CustomBook> books) {
-        books.forEach(book -> {
-            try {
-                bookListDao.addBook(book);
-            } catch (DaoException e) {
-                Assert.fail(e.getMessage());
-            }
-        });
+        books.forEach(book -> Library.getInstance().addBook(book));
         List<CustomBook> actual = bookListDao.sortByTag(SortType.AUTHOR);
         List<CustomBook> expected = Arrays.asList(
                 new CustomBook("Book5", Arrays.asList("Author11", "Author12"), 2002, 300),
@@ -155,13 +143,7 @@ public class BookListDaoTest {
 
     @Test(dataProvider = "getBooks", dataProviderClass = DataTransfer.class)
     public void sortByYear_books_sortedBooks(List<CustomBook> books) {
-        books.forEach(book -> {
-            try {
-                bookListDao.addBook(book);
-            } catch (DaoException e) {
-                Assert.fail(e.getMessage());
-            }
-        });
+        books.forEach(book -> Library.getInstance().addBook(book));
         List<CustomBook> actual = bookListDao.sortByTag(SortType.YEAR);
         List<CustomBook> expected = Arrays.asList(
                 new CustomBook("Book3", Arrays.asList("Author41", "Author42"), 2001, 200),
@@ -174,13 +156,7 @@ public class BookListDaoTest {
 
     @Test(dataProvider = "getBooks", dataProviderClass = DataTransfer.class)
     public void sortByNumberPages_books_sortedBooks(List<CustomBook> books) {
-        books.forEach(book -> {
-            try {
-                bookListDao.addBook(book);
-            } catch (DaoException e) {
-                Assert.fail(e.getMessage());
-            }
-        });
+        books.forEach(book -> Library.getInstance().addBook(book));
         List<CustomBook> actual = bookListDao.sortByTag(SortType.NUMBER_PAGES);
         List<CustomBook> expected = Arrays.asList(
                 new CustomBook("Book4", Arrays.asList("Author51", "Author52"), 2005, 100),
