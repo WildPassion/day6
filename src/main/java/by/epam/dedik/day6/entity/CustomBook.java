@@ -2,22 +2,23 @@ package by.epam.dedik.day6.entity;
 
 import by.epam.dedik.day6.service.UniqueIdService;
 
+import java.awt.print.Book;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class Book {
+public class CustomBook {
     private int id;
     private String name;
     private List<String> authors;
     private int year;
     private int numberPages;
 
-    public Book() {
+    public CustomBook() {
         id = UniqueIdService.getId();
     }
 
-    public Book(String name, List<String> authors, int year, int numberPages) {
+    public CustomBook(String name, List<String> authors, int year, int numberPages) {
         id = UniqueIdService.getId();
         this.name = name;
         this.authors = authors;
@@ -74,7 +75,7 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Book book = (Book) o;
+        CustomBook book = (CustomBook) o;
 
         if (year != book.year) return false;
         if (numberPages != book.numberPages) return false;
@@ -93,9 +94,9 @@ public class Book {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Book.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", CustomBook.class.getSimpleName() + "{", "}")
                 .add("id=" + id)
-                .add("name='" + name + "'")
+                .add("name=\"" + name + "\"")
                 .add("authors=" + authors)
                 .add("year=" + year)
                 .add("numberPages=" + numberPages)

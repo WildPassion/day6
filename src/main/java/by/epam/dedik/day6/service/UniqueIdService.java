@@ -1,12 +1,12 @@
 package by.epam.dedik.day6.service;
 
-import java.util.Random;
-
 public class UniqueIdService {
+    private static int NEXT_ID = 0;
+
     private UniqueIdService() {
     }
 
     public static int getId() {
-        return new Random().nextInt();
+        return ++NEXT_ID;
     }
 }

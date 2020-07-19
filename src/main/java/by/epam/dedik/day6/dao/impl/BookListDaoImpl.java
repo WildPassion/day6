@@ -1,7 +1,8 @@
 package by.epam.dedik.day6.dao.impl;
 
 import by.epam.dedik.day6.dao.BookListDao;
-import by.epam.dedik.day6.entity.Book;
+import by.epam.dedik.day6.dao.DaoException;
+import by.epam.dedik.day6.entity.CustomBook;
 import by.epam.dedik.day6.entity.Library;
 import by.epam.dedik.day6.service.SortType;
 import by.epam.dedik.day6.service.UniqueIdService;
@@ -14,58 +15,56 @@ public class BookListDaoImpl implements BookListDao {
     private BookValidator bookValidator = new BookValidator();
 
     @Override
-    public boolean addBook(Book book) {
-        boolean result = false;
+    public void addBook(CustomBook book) throws DaoException {
         if (bookValidator.isValidBook(book)) {
-            if (book.getName() == null) {
+            if (book.getId() == 0) {
                 book.setId(UniqueIdService.getId());
             }
-            List<Book> books = Library.getInstance().getBooks();
-            result = books.add(book);
+            Library.getInstance().addBook(book);
+        } else {
+            throw new DaoException("Invalid book");
         }
-        return result;
     }
 
     @Override
-    public boolean removeBook(Book book) {
-        boolean result = false;
-        if (book != null && book.getId() != 0) {
-            List<Book> books = Library.getInstance().getBooks();
-            result = books.remove(book);
+    public void removeBook(CustomBook book) throws DaoException {
+        if (bookValidator.isValidBook(book)) {
+            Library.getInstance().removeBook(book);
+        } else {
+            throw new DaoException("Invalid book");
         }
-        return result;
     }
 
     @Override
-    public List<Book> findByName(String name) {
+    public List<CustomBook> findByName(String name) {
         return Library.getInstance().getBooks().stream().
                 filter(book -> book.getName().equals(name)).
                 collect(Collectors.toList());
     }
 
     @Override
-    public List<Book> findByAuthor(String author) {
+    public List<CustomBook> findByAuthor(String author) {
         return Library.getInstance().getBooks().stream().
                 filter(book -> book.getAuthors().contains(author)).
                 collect(Collectors.toList());
     }
 
     @Override
-    public List<Book> findByYear(int year) {
+    public List<CustomBook> findByYear(int year) {
         return Library.getInstance().getBooks().stream().
                 filter(book -> book.getYear() == year).
                 collect(Collectors.toList());
     }
 
     @Override
-    public List<Book> findByNumberPages(int numberPages) {
+    public List<CustomBook> findByNumberPages(int numberPages) {
         return Library.getInstance().getBooks().stream().
                 filter(book -> book.getNumberPages() == numberPages).
                 collect(Collectors.toList());
     }
 
     @Override
-    public List<Book> sortByTag(SortType sortType) {
+    public List<CustomBook> sortByTag(SortType sortType) {
         return Library.getInstance().getBooks().stream()
                 .sorted(sortType.getComparator())
                 .collect(Collectors.toList());

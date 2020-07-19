@@ -1,15 +1,16 @@
 package by.epam.dedik.day6.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Library {
     private static Library instance;
 
-    private List<Book> books;
+    private List<CustomBook> books;
 
     private Library() {
-        books = new ArrayList<Book>();
+        books = new ArrayList<>();
     }
 
     public static Library getInstance() {
@@ -17,7 +18,15 @@ public class Library {
         return instance;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public List<CustomBook> getBooks() {
+        return Collections.unmodifiableList(books);
+    }
+
+    public boolean addBook(CustomBook book) {
+        return books.add(book);
+    }
+
+    public boolean removeBook(CustomBook book) {
+        return books.remove(book);
     }
 }

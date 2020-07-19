@@ -1,22 +1,22 @@
 package by.epam.dedik.day6.dao;
 
-import by.epam.dedik.day6.entity.Book;
+import by.epam.dedik.day6.entity.CustomBook;
 import by.epam.dedik.day6.service.SortType;
 
 import java.util.List;
 
 public interface BookListDao {
-    boolean addBook(Book book);
+    void addBook(CustomBook book) throws DaoException;
 
-    boolean removeBook(Book book);
+    void removeBook(CustomBook book) throws DaoException;
 
-    List<Book> findByName(String name);
+    List<CustomBook> findByName(String name);
 
-    List<Book> findByAuthor(String author);
+    List<CustomBook> findByAuthor(String author);
 
-    List<Book> findByYear(int year);
+    List<CustomBook> findByYear(int year);
 
-    List<Book> findByNumberPages(int numberPages);
+    List<CustomBook> findByNumberPages(int numberPages);
 
-    List<Book> sortByTag(SortType sortType);
+    List<CustomBook> sortByTag(SortType sortType);
 }

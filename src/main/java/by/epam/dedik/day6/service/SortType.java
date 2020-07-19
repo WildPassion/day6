@@ -1,6 +1,6 @@
 package by.epam.dedik.day6.service;
 
-import by.epam.dedik.day6.entity.Book;
+import by.epam.dedik.day6.entity.CustomBook;
 
 import java.util.Comparator;
 
@@ -12,13 +12,13 @@ public enum SortType {
     YEAR((first, second) -> Integer.compare(first.getYear(), second.getYear())),
     NUMBER_PAGES((first, second) -> Integer.compare(first.getNumberPages(), second.getNumberPages()));
 
-    private Comparator<Book> comparator;
+    private Comparator<CustomBook> comparator;
 
-    SortType(Comparator<Book> comparator) {
+    SortType(Comparator<CustomBook> comparator) {
         this.comparator = comparator;
     }
 
-    public Comparator<Book> getComparator() {
+    public Comparator<CustomBook> getComparator() {
         return comparator;
     }
 }

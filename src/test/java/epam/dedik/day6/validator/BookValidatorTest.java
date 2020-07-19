@@ -1,6 +1,7 @@
 package epam.dedik.day6.validator;
 
-import by.epam.dedik.day6.entity.Book;
+import by.epam.dedik.day6.controller.command.CommandName;
+import by.epam.dedik.day6.entity.CustomBook;
 import by.epam.dedik.day6.validator.BookValidator;
 import epam.dedik.day6.data.DataTransfer;
 import org.testng.Assert;
@@ -16,12 +17,17 @@ public class BookValidatorTest {
     }
 
     @Test(dataProvider = "getValidBook", dataProviderClass = DataTransfer.class)
-    public void isValidBook_validBook_true(Book book) {
+    public void isValidBook_validBook_true(CustomBook book) {
         Assert.assertTrue(validator.isValidBook(book));
     }
 
     @Test(dataProvider = "getInvalidBook", dataProviderClass = DataTransfer.class)
-    public void isValidBook_invalidBook_false(Book book) {
+    public void isValidBook_invalidBook_false(CustomBook book) {
         Assert.assertFalse(validator.isValidBook(book));
+    }
+
+    @Test
+    public void doo() {
+        System.out.println(CommandName.ADD_BOOK.name());
     }
 }
