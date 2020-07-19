@@ -29,4 +29,8 @@ public class Library {
     public boolean removeBook(CustomBook book) {
         return books.remove(book);
     }
+
+    public void removeBook(int index) {
+        books.remove(index);
+    }
 }
