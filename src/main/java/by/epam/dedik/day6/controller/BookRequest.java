@@ -6,9 +6,11 @@ import by.epam.dedik.day6.service.SortType;
 
 public class BookRequest {
     private static final String EMPTY = "";
-    private int number;
+    private int year;
+    private int numberPages;
     private CustomBook book;
     private String name;
+    private String author;
     private SortType sortType;
     private String command;
 
@@ -23,8 +25,16 @@ public class BookRequest {
                 parameter = name == null ? EMPTY : name;
                 break;
             }
-            case NUMBER: {
-                parameter = String.valueOf(number);
+            case AUTHOR: {
+                parameter = author == null ? EMPTY : author;
+                break;
+            }
+            case YEAR: {
+                parameter = String.valueOf(year);
+                break;
+            }
+            case NUMBER_PAGES: {
+                parameter = String.valueOf(numberPages);
                 break;
             }
             case SORT_TYPE: {
@@ -41,8 +51,8 @@ public class BookRequest {
         return parameter;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public void setBook(CustomBook book) {
@@ -59,5 +69,13 @@ public class BookRequest {
 
     public void setCommand(String command) {
         this.command = command;
+    }
+
+    public void setNumberPages(int numberPages) {
+        this.numberPages = numberPages;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
