@@ -25,9 +25,4 @@ public class BookValidatorTest {
     public void isValidBook_invalidBook_false(CustomBook book) {
         Assert.assertFalse(validator.isValidBook(book));
     }
-
-    @Test
-    public void doo() {
-        System.out.println(CommandName.ADD_BOOK.name());
-    }
 }
