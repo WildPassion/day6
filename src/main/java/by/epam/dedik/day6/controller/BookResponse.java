@@ -2,7 +2,6 @@ package by.epam.dedik.day6.controller;
 
 import by.epam.dedik.day6.entity.CustomBook;
 
-import java.awt.print.Book;
 import java.util.List;
 
 public class BookResponse {
