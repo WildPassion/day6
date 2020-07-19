@@ -14,9 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-@Test(enabled = false)
 public class BookListDaoTest {
     private BookListDao bookListDao;
 
@@ -27,30 +25,39 @@ public class BookListDaoTest {
 
     @AfterMethod
     private void removeFromLibrary() {
-        Library.getInstance().getBooks().removeIf(Objects::nonNull);
+        int i = Library.getInstance().getBooks().size();
+        while (Library.getInstance().getBooks().size() > 0) {
+            Library.getInstance().removeBook(--i);
+        }
     }
 
-//    @Test(dataProvider = "getValidBook", dataProviderClass = DataTransfer.class)
-//    public void addBook_validBook_true(CustomBook book) throws DaoException {
-//        Assert.assertTrue(bookListDao.addBook(book));
-//    }
-//
-//    @Test(dataProvider = "getInvalidBook", dataProviderClass = DataTransfer.class)
-//    public void addBook_invalidBook_false(CustomBook book) throws DaoException {
-//        Assert.assertFalse(bookListDao.addBook(book));
-//    }
+    @Test(dataProvider = "getValidBook", dataProviderClass = DataTransfer.class)
+    public void addBook_validBook_true(CustomBook book) throws DaoException {
+        book.setId(0);
+        bookListDao.addBook(book);
+        Assert.assertTrue(Library.getInstance().getBooks().contains(book));
+    }
 
-//    @Test(dataProvider = "getValidBook", dataProviderClass = DataTransfer.class)
-//    public void removeBook_validBook_true(CustomBook book) throws DaoException {
-//        bookListDao.addBook(book);
-//        Assert.assertTrue(bookListDao.removeBook(book));
-//    }
-//
-//    @Test(dataProvider = "getInvalidBook", dataProviderClass = DataTransfer.class)
-//    public void removeBook_invalidBook_false(CustomBook book) throws DaoException {
-//        bookListDao.addBook(book);
-//        Assert.assertFalse(bookListDao.removeBook(book));
-//    }
+    @Test(dataProvider = "getInvalidBook", dataProviderClass = DataTransfer.class,
+            expectedExceptions = DaoException.class, expectedExceptionsMessageRegExp = "Invalid book")
+    public void addBook_invalidBook_false(CustomBook book) throws DaoException {
+        bookListDao.addBook(book);
+    }
+
+    @Test(dataProvider = "getValidBook", dataProviderClass = DataTransfer.class)
+    public void removeBook_validBook_true(CustomBook book) throws DaoException {
+        bookListDao.addBook(book);
+        bookListDao.removeBook(book);
+        Assert.assertFalse(Library.getInstance().getBooks().contains(book));
+    }
+
+    @Test(dataProvider = "getValidBook", dataProviderClass = DataTransfer.class,
+            expectedExceptions = DaoException.class, expectedExceptionsMessageRegExp = "Invalid book")
+    public void removeBook_invalidBook_false(CustomBook book) throws DaoException {
+        bookListDao.addBook(book);
+        book.setYear(-2000);
+        bookListDao.removeBook(book);
+    }
 
     @Test(dataProvider = "getValidBook", dataProviderClass = DataTransfer.class)
     public void findByName_existingBook_true(CustomBook book) throws DaoException {
