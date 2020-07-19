@@ -49,10 +49,6 @@ public class CustomBook {
         this.authors = authors;
     }
 
-    public void addAuthor(String author) {
-        authors.add(author);
-    }
-
     public int getYear() {
         return year;
     }
