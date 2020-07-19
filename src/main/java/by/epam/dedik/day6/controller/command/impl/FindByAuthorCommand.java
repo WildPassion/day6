@@ -14,8 +14,8 @@ public class FindByAuthorCommand implements BookCommand {
     @Override
     public void execute(BookRequest request, BookResponse response) {
         BookListDao dao = new BookListDaoImpl();
-        String name = request.getParameter(Params.NAME);
-        List<CustomBook> books = dao.findByAuthor(name);
+        String author = request.getParameter(Params.AUTHOR);
+        List<CustomBook> books = dao.findByAuthor(author);
         response.setBooks(books);
     }
 }

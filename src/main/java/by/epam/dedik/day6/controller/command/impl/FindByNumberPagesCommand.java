@@ -14,8 +14,8 @@ public class FindByNumberPagesCommand implements BookCommand {
     @Override
     public void execute(BookRequest request, BookResponse response) {
         BookListDao dao = new BookListDaoImpl();
-        int number = Integer.parseInt(request.getParameter(Params.NUMBER));
-        List<CustomBook> books = dao.findByNumberPages(number);
+        int numberPages = Integer.parseInt(request.getParameter(Params.NUMBER_PAGES));
+        List<CustomBook> books = dao.findByNumberPages(numberPages);
         response.setBooks(books);
     }
 }

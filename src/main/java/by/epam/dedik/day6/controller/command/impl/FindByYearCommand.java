@@ -14,8 +14,8 @@ public class FindByYearCommand implements BookCommand {
     @Override
     public void execute(BookRequest request, BookResponse response) {
         BookListDao dao = new BookListDaoImpl();
-        int number = Integer.parseInt(request.getParameter(Params.NUMBER));
-        List<CustomBook> books = dao.findByYear(number);
+        int year = Integer.parseInt(request.getParameter(Params.YEAR));
+        List<CustomBook> books = dao.findByYear(year);
         response.setBooks(books);
     }
 }
