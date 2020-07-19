@@ -12,6 +12,7 @@ public class BookRequest {
     private String name;
     private String author;
     private SortType sortType;
+    private String command;
 
     public String getParameter(Params params) {
         String parameter = EMPTY;
@@ -22,6 +23,7 @@ public class BookRequest {
             case YEAR -> parameter = String.valueOf(year);
             case NUMBER_PAGES -> parameter = String.valueOf(numberPages);
             case SORT_TYPE -> parameter = String.valueOf(sortType);
+            case COMMAND -> parameter = command;
         }
         return parameter;
     }
@@ -40,6 +42,10 @@ public class BookRequest {
 
     public void setSortType(SortType sortType) {
         this.sortType = sortType;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
     }
 
     public void setNumberPages(int numberPages) {

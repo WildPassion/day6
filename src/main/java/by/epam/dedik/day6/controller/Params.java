@@ -6,5 +6,6 @@ public enum Params {
     AUTHOR,
     YEAR,
     NUMBER_PAGES,
-    SORT_TYPE
+    SORT_TYPE,
+    COMMAND
 }
